@@ -21,5 +21,5 @@ date_now = Time.now
 file_name = date_now.strftime("%F_face (%M-%H-%S)")
 
 face_file = File.new("./data/faces/#{file_name}.txt","a:UTF-8")
-face_file.puts( make_face(foreheads_path, eyes_path, noses_path, mouths_path) )
+face_file.puts(face)
 face_file.close
