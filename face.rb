@@ -3,23 +3,14 @@
 # Программа-фоторобот, которая «собирает» лицо из фрагментов.
 
 # Заведем четыре переменные с путями к файлам с набором для каждого фрагмента.
-path ="#{__dir__}/data/parts_of_face/"
-foreheads_path = "#{path}foreheads.txt"
-eyes_path = "#{path}eyes.txt"
-noses_path = "#{path}noses.txt"
-mouths_path = "#{path}mouths.txt"
 
-foreheads = File.new(foreheads_path, "r:UTF-8").readlines
-eyes = File.new(eyes_path, "r:UTF-8").readlines
-noses = File.new(noses_path, "r:UTF-8").readlines
-mouths = File.new(mouths_path, "r:UTF-8").readlines
-face = [foreheads.sample, eyes.sample, noses.sample, mouths.sample]
+part_of_face = %w[foreheads eyes noses mouths]
+face =
+  part_of_face.map do |name_file|
+    File.readlines("#{__dir__}/data/parts_of_face/#{name_file}.txt", chomp:true).sample
+  end
 
-#Определяем текущую дату
-date_now = Time.now
-#Имя файла
-file_name = date_now.strftime("%F_face (%M-%H-%S)")
-
+file_name = Time.now.strftime("%F_face (%M-%H-%S)")
 face_file = File.new("./data/faces/#{file_name}.txt","a:UTF-8")
 face_file.puts(face)
 face_file.close
